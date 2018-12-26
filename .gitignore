@@ -3,6 +3,7 @@ venv/
 
 *.swp
 
+.env
 app.db
 logs/
 
