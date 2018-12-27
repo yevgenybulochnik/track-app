@@ -23,5 +23,3 @@ def create_app(config=Config):
     register_blueprints(app)
 
     return app
-
-from app import models
