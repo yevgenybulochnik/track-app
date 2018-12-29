@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% macro render_boostrap_field(field)%}
+  <div class="form-group">
+    <label for="{{field.name}}">{{field.label.text}}</label>
+    {% if field.errors %}
+      {{field(class="form-control is-invalid", **kwargs)}}
+    {% else %}
+      {{field(class="form-control", **kwargs)}}
+    {% endif %}
+      {% if field.errors %}
+        {% for error in field.errors %}
+        <small style="color:red">{{ error }}</small>
+        {% endfor %}
+      {% endif %}
+  </div>
+{% endmacro %}
+
+{% block app_content %}
+<div class='container'>
+  <div class='row mt-5 position-relative justify-content-center'>
+    <form style="width: 20em" method='post' novalidate>
+      {{ form.hidden_tag() }}
+      {{ render_boostrap_field(form.email, placeholder="Enter Email") }}
+      {{ render_boostrap_field(form.password, placeholder="Enter Password") }}
+      <div class="d-flex flex-column align-items-center">
+        <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+        {% with messages = get_flashed_messages() %}
+        {% if messages%}
+        {% for message in messages %}
+        <small class='p-2' style="color: red">{{ message }}</small>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    $(function() {
+      $('input').blur(function() {
+        var value = $(this).val()
+        var invalid = $(this).hasClass('is-invalid')
+        if (value && !invalid) {
+          $(this).addClass('is-valid')
+        }
+      })
+    })
+  </script>
+{% endblock %}
