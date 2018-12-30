@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "workspaces": [
-      "globals",
-      "../login_out/static/test_component"
-  ]
-}
