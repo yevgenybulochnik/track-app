@@ -12,15 +12,20 @@ def register(app):
         """
         Build application assets
         """
+        """
+        Should refactor to use file globing in the future.
+        Also refactor root package.json for globing
+        """
         application_root = app.root_path
         project_root = path.dirname(application_root)
         workspace_file = path.join(project_root, "package.json")
         with open(workspace_file) as f:
             data = json.loads(f.read())
         if data['workspaces']:
-            for package in data['workspaces']:
-                package_path = path.abspath(package)
-                package_dist_path = path.join(package_path, 'dist')
+            for workspace in data['workspaces']:
+                package_name = path.basename(workspace)
+                package_path = path.abspath(workspace)
+                package_build_path = path.join(package_path, 'build')
                 static_path = path.abspath(
                     path.join(package_path, '..', '..', 'static')
                 )
@@ -36,15 +41,19 @@ def register(app):
                     )
                 if not path.exists(static_builds_path):
                     subprocess.run(
-                        ['mkdir', 'package_builds'],
+                        ['mkdir', static_builds_path],
                         cwd=static_path
                     )
-                for file in listdir(package_dist_path):
+                subprocess.run(
+                   ['mkdir', package_name],
+                   cwd=static_builds_path
+                   )
+                for file in listdir(package_build_path):
                     subprocess.run(
                         [
                             'ln', '-snf',
-                            path.join(package_dist_path, file),
-                            static_builds_path
+                            path.join(package_build_path, file),
+                            path.join(static_builds_path, package_name)
                         ]
                     )
         else:

@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>test</title>
   {% block styles %}
-    <link rel="stylesheet" href="{{url_for('static', filename='package_builds/bs.bundle.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='package_builds/libs/bs.bundle.css')}}">
   {% endblock %}
 </head>
 <body>
   {% block app_content %}{% endblock %}
 
   {% block scripts %}
-   <script src="{{url_for('static', filename='package_builds/libs.bundle.js')}}"></script>
+   <script src="{{url_for('static', filename='package_builds/libs/libs.bundle.js')}}"></script>
   {% endblock %}
 </body>
 </html>
