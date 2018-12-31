@@ -18,25 +18,34 @@ def register(app):
         with open(workspace_file) as f:
             data = json.loads(f.read())
         if data['workspaces']:
-            """
-            needs to be refactored to test if package_builds already present
-            """
-            for package_dir in data['workspaces']:
-                package_full_path = path.join(project_root, package_dir)
-                package_dist_path = path.join(package_dir, 'dist')
-                static_dir_path = path.abspath(path.join(package_full_path, '..', '..', 'static'))
-                static_package_builds_path = path.join(static_dir_path, 'package_builds')
+            for package in data['workspaces']:
+                package_path = path.abspath(package)
+                package_dist_path = path.join(package_path, 'dist')
+                static_path = path.abspath(
+                    path.join(package_path, '..', '..', 'static')
+                )
+                static_builds_path = path.join(static_path, 'package_builds')
                 subprocess.run(
                     ['./node_modules/.bin/webpack'],
-                    cwd=package_full_path
+                    cwd=package_path
                 )
-                subprocess.run(
-                    ['mkdir',  'package_builds'],
-                    cwd=static_dir_path
-                )
+                if not path.exists(static_path):
+                    subprocess.run(
+                        ['mkdir', 'static'],
+                        cwd=path.dirname(static_path)
+                    )
+                if not path.exists(static_builds_path):
+                    subprocess.run(
+                        ['mkdir', 'package_builds'],
+                        cwd=static_path
+                    )
                 for file in listdir(package_dist_path):
                     subprocess.run(
-                        ['ln', '-snf', path.abspath(path.join(package_dist_path, file)), static_package_builds_path]
+                        [
+                            'ln', '-snf',
+                            path.join(package_dist_path, file),
+                            static_builds_path
+                        ]
                     )
         else:
             print("You have no packages registered")
