@@ -7,7 +7,7 @@ module.exports = {
     libs: './libs.js',
   },
   output: {
-    path: path.join(__dirname, '..', '..', 'static'),
+    path: path.join(__dirname, 'dist'),
     filename: '[name].bundle.js'
   },
   module: {
