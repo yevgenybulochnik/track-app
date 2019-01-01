@@ -1,7 +1,0 @@
-{% extends "base.html" %}
-
-{% block app_content %}
-  <div>Hello world!</div>
-  <div>{{ current_user.email }}</div>
-  <a class="btn btn-primary" href="{{ url_for('login_out.logout') }}">Logout</a>
-{% endblock %}

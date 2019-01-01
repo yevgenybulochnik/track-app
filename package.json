@@ -1,6 +1,6 @@
 {
   "private": true,
   "workspaces": [
-    "app/packages/libs"
+    "app/main/packages/libs"
   ]
 }
