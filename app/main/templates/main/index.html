@@ -1,11 +1,17 @@
 {% extends "base.html" %}
+{% from "main/nav.html" import navbar %}
+
+{% block meta %}
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% endblock meta %}
 
 {% block styles %}
   <link rel="stylesheet" href="{{url_for('main.static', filename='package_builds/libs/bs.bundle.css')}}">
 {% endblock %}
 
 {% block navbar%}
-<div>test</div>
+  {% call navbar() %}
+  {% endcall %}
 {% endblock %}
 
 {% block app_content %}
