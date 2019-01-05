@@ -1,0 +1,15 @@
+__pycache__/
+venv/
+
+*.swp
+
+.env
+app.db
+logs/
+node_modules/
+package_builds/
+dist/
+build/
+
+.vagrant/
+ubuntu-xenial-16.04-cloudimg-console.log
