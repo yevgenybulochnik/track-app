@@ -44,10 +44,11 @@ def register(app):
                         ['mkdir', static_builds_path],
                         cwd=static_path
                     )
-                subprocess.run(
-                   ['mkdir', package_name],
-                   cwd=static_builds_path
-                   )
+                if not path.exists(path.join(static_builds_path, package_name)):
+                    subprocess.run(
+                       ['mkdir', package_name],
+                       cwd=static_builds_path
+                       )
                 for file in listdir(package_build_path):
                     subprocess.run(
                         [
