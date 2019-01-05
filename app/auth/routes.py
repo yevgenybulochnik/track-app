@@ -11,8 +11,8 @@ from flask_login import (
     logout_user
 )
 from werkzeug.urls import url_parse
-from app.login_out import bp
-from app.login_out.forms import LoginForm
+from app.auth import bp
+from app.auth.forms import LoginForm
 from app.models import User
 
 import urllib.parse
@@ -27,13 +27,13 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.verify_password(form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('login_out.login'))
+            return redirect(url_for('auth.login'))
         login_user(user)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('main.index')
         return redirect(urllib.parse.unquote_plus(next_page))
-    return render_template('login.html', form=form)
+    return render_template('auth/login.html', form=form)
 
 
 @bp.route('/logout')

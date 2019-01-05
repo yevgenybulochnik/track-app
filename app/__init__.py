@@ -8,14 +8,14 @@ from config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
-login.login_view = 'login_out.login'
+login.login_view = 'auth.login'
 
 
 def register_blueprints(app):
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
-    from app.login_out import bp as login_out_bp
-    app.register_blueprint(login_out_bp)
+    from app.auth import bp as auth_bp
+    app.register_blueprint(auth_bp)
 
 
 def create_app(config=Config):
