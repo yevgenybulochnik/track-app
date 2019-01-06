@@ -1,0 +1,15 @@
+{% macro render_boostrap_field(field)%}
+  <div class="form-group">
+    <label for="{{field.name}}">{{field.label.text}}</label>
+    {% if field.errors %}
+      {{field(class="form-control is-invalid", **kwargs)}}
+    {% else %}
+      {{field(class="form-control", **kwargs)}}
+    {% endif %}
+      {% if field.errors %}
+        {% for error in field.errors %}
+        <small style="color:red">{{ error }}</small>
+        {% endfor %}
+      {% endif %}
+  </div>
+{% endmacro %}
