@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "main/nav.html" import navbar %}
+{% from "main/nav.html" import navbar, nav %}
 
 {% block meta %}
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,14 +10,18 @@
 {% endblock %}
 
 {% block navbar%}
-  {% call navbar() %}
-    <a class="nav-link nav-item" href="{{url_for('climbing.overview')}}">Climbing</a>
-    <a class="nav-link nav-item" href="{{url_for('climbing.session')}}">Session</a>
-    {% if current_user.is_anonymous %}
-    <a class="nav-link nav-item" href="{{url_for('auth.login')}}">Login</a>
-    {% else %}
-    <a class="nav-link nav-item" href="{{url_for('auth.logout')}}">Logout</a>
-    {% endif %}
+  {% call navbar("Tracking-App") %}
+    {% call nav("center") %}
+      <a class="nav-link nav-item" href="{{url_for('climbing.overview')}}">Climbing</a>
+      <a class="nav-link nav-item" href="{{url_for('climbing.session')}}">Session</a>
+    {% endcall %}
+    {% call nav("end") %}
+      {% if current_user.is_anonymous %}
+        <a class="nav-link nav-item" href="{{url_for('auth.login')}}">Login</a>
+      {% else %}
+        <a class="nav-link nav-item" href="{{url_for('auth.logout')}}">Logout</a>
+      {% endif %}
+    {% endcall %}
   {% endcall %}
 {% endblock %}
 
