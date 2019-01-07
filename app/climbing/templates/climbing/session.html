@@ -1,0 +1,13 @@
+{% extends "main/index.html" %}
+
+{% block app_content %}
+  <br>
+  <div class="container">
+    <div id="react"></div>
+  </div>
+  <script>
+    window.props = {{props|tojson}}
+    window.react_mount = document.getElementById("react")
+  </script>
+  <script src="{{url_for('climbing.static', filename='package_builds/session-form/sessionForm.bundle.js')}}"></script>
+{% endblock app_content %}

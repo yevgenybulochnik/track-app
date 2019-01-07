@@ -1,6 +1,7 @@
 {
   "private": true,
   "workspaces": [
-    "app/main/packages/libs"
+    "app/main/packages/libs",
+    "app/climbing/packages/session-form"
   ]
 }

@@ -16,6 +16,8 @@ def register_blueprints(app):
     app.register_blueprint(main_bp)
     from app.auth import bp as auth_bp
     app.register_blueprint(auth_bp)
+    from app.climbing import bp as climbing_bp
+    app.register_blueprint(climbing_bp)
 
 
 def create_app(config=Config):
