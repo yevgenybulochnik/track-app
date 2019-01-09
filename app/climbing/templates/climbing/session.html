@@ -2,9 +2,7 @@
 
 {% block app_content %}
   <br>
-  <div class="container">
-    <div id="react"></div>
-  </div>
+  <div id="react"></div>
   <script>
     window.props = {{props|tojson}}
     window.react_mount = document.getElementById("react")
