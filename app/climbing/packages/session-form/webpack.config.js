@@ -19,8 +19,12 @@ module.exports = {
         options: { presets: ['@babel/env'] }
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          {loader: MiniCssExtractPlugin.loader},
+          {loader: 'css-loader'},
+          {loader: 'sass-loader'}
+        ]
       }
     ]
   },
