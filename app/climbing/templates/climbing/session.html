@@ -1,5 +1,9 @@
 {% extends "main/index.html" %}
 
+{% block styles %}
+  <link rel="stylesheet" href="{{url_for('climbing.static', filename="package_builds/session-form/sessionForm.bundle.css")}}">
+{% endblock styles %}
+
 {% block app_content %}
   <br>
   <div id="react"></div>

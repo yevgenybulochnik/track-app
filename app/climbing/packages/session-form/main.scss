@@ -1,0 +1,66 @@
+@import "~bootstrap/scss/bootstrap";
+
+
+.session-form {
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+    grid-template-rows: 1fr 9fr;
+    grid-template-areas:
+        "grade-input selection"
+        "grade-input tracking";
+        @include media-breakpoint-up(lg) {
+            grid-tempalte-columns: 2fr 4fr;
+            grid-template-areas:
+                "selection tracking"
+                "grade-input tracking";
+        };
+    //border: solid blue 1px;
+    div {
+        //border: solid red 1px;
+    }
+}
+
+.session-selection {
+    grid-area: selection;
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem;
+}
+
+.grade-input {
+    grid-area: grade-input;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.session-tracking {
+    grid-area: tracking;
+    display: flex;
+    justify-content: center;
+}
+
+.numberInput-group {
+    @extend .btn-group-toggle;
+    margin: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    .btn {
+        border-radius: 0;
+    }
+    & :first-child {
+        border-radius: 0.25rem 0.25rem 0 0;
+    }
+    & :last-child {
+        border-radius: 0 0 0.25rem 0.25rem;
+    }
+    @include media-breakpoint-up(lg) {
+        flex-direction: row;
+        & :first-child {
+            border-radius: 0.25rem 0 0 0.25rem;
+        }
+        & :last-child {
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
+    };
+}
