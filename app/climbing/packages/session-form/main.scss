@@ -36,8 +36,14 @@
 
 .session-tracking {
     grid-area: tracking;
-    display: flex;
-    justify-content: center;
+}
+
+.list-group {
+    list-style: decimal inside;
+}
+
+.list-group-item {
+    display: list-item;
 }
 
 .numberInput-group {

@@ -7,6 +7,9 @@ const ButtonInput = ({ name, grade, value, isActive, handleChange}) =>
     <input type="radio" name={name} value={value} onChange={handleChange}/> {grade}
   </label>
 
+const Route = ({grade, letter}) =>
+  <li class="list-group-item"> {grade} {letter}</li>
+
 
 class SessionForm extends React.Component {
   state = {
@@ -37,7 +40,20 @@ class SessionForm extends React.Component {
       {grade: '+', value: '+', isActive: false},
       {grade: '-', value: '-', isActive: false},
     ],
-    tracking: []
+    tracking: [
+    ]
+  }
+
+  displayTracking() {
+    if (this.state.tracking.length) {
+      return (
+        <ul class="list-group">
+          {this.state.tracking.map((trackedRoute) => <Route {...trackedRoute} />)}
+        </ul>
+      )
+    } else {
+       return <h5 style={{textAlign: 'center'}}>No Routes Added</h5>
+    }
   }
 
   handleGradeChange(changeEvent, index) {
@@ -69,12 +85,18 @@ class SessionForm extends React.Component {
         }
         return letter
       })
-    })
-    console.log(this.state)
+    }, () => this.setState({
+      tracking: [ 
+        {
+          grade: this.state.selectedGrade, 
+          letter: this.state.selectedLetter
+        },
+        ...this.state.tracking,
+      ]}) 
+    )
   }
 
   render() {
-    const {tracking} = this.state
     return (
       <div class="container">
         <div class="session-form">
@@ -104,11 +126,7 @@ class SessionForm extends React.Component {
           </div>
           <div class="session-tracking">
             {
-              tracking? (
-                <h5>No Routes Added</h5>
-              ): (
-                <div>session tracking</div>
-              )
+              this.displayTracking()
             }
           </div>
         </div>
