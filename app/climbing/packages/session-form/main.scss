@@ -4,7 +4,7 @@
 .session-form {
     display: grid;
     grid-template-columns: 1fr 9fr;
-    grid-template-rows: 1fr 9fr;
+    grid-template-rows: auto 9fr;
     grid-template-areas:
         "grade-input selection"
         "grade-input tracking";

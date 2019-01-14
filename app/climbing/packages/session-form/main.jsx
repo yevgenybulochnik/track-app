@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './main.scss'
 
-const ButtonInput = ({ name, grade, value, isActive, handleChange}) =>
+const ButtonInput = ({ name, grade, value, isActive, handleClick}) =>
   <label class={"btn btn-secondary " + (isActive ? "active" : "")}>
-    <input type="radio" name={name} value={value} onChange={handleChange}/> {grade}
+    <input type="radio" name={name} value={value} onClick={handleClick}/> {grade}
   </label>
 
 const Route = ({grade, letter}) =>
@@ -57,24 +57,55 @@ class SessionForm extends React.Component {
   }
 
   handleGradeChange(changeEvent, index) {
-    this.setState({
-      selectedGrade: changeEvent.target.value,
-      grades: this.state.grades.map((grade, position) => {
-        if (position === index) {
-          grade.isActive = true;
-        } else {
-          grade.isActive = false
-        }
-        return grade
-      }),
-      letters: this.state.letters.map(letter => {
-        letter.isActive = false;
-        return letter
+    const letterLessGrades = ['5.6', '5.7', '5.8', '5.9']
+    if (letterLessGrades.includes(changeEvent.target.value)) {
+      this.setState({
+        selectedGrade: changeEvent.target.value,
+        grades: this.state.grades.map((grade, position) => {
+          if (position === index) {
+            grade.isActive = true;
+          } else {
+            grade.isActive = false
+          }
+          return grade
+        }),
+        letters: this.state.letters.map(letter => {
+          letter.isActive = false;
+          return letter
+        })
+      }, () => this.setState({
+        tracking: [
+          {
+            grade: this.state.selectedGrade,
+            letter: ''
+          },
+          ...this.state.tracking
+        ]
+      }))
+    } else {
+      this.setState({
+        selectedGrade: changeEvent.target.value,
+        grades: this.state.grades.map((grade, position) => {
+          if (position === index) {
+            grade.isActive = true;
+          } else {
+            grade.isActive = false
+          }
+          return grade
+        }),
+        letters: this.state.letters.map(letter => {
+          letter.isActive = false;
+          return letter
+        })
       })
-    })
+    }
   }
 
   handleLetterChange(changeEvent, index) {
+    const letterLessGrades = ['5.6', '5.7', '5.8', '5.9']
+    if (letterLessGrades.includes(this.state.selectedGrade)) {
+      return
+    }
     this.setState({
       selectedLetter: changeEvent.target.value,
       letters: this.state.letters.map((letter, position) => {
@@ -86,13 +117,13 @@ class SessionForm extends React.Component {
         return letter
       })
     }, () => this.setState({
-      tracking: [ 
+      tracking: [
         {
-          grade: this.state.selectedGrade, 
+          grade: this.state.selectedGrade,
           letter: this.state.selectedLetter
         },
         ...this.state.tracking,
-      ]}) 
+      ]})
     )
   }
 
@@ -111,7 +142,7 @@ class SessionForm extends React.Component {
               {this.state.grades.map((grade, index) =>
                 <ButtonInput
                   name="number-input"
-                  handleChange={(e) => this.handleGradeChange(e, index)}
+                  handleClick={(e) => this.handleGradeChange(e, index)}
                   {...grade}/>
               )}
             </div>
@@ -119,7 +150,7 @@ class SessionForm extends React.Component {
               {this.state.letters.map((letter, index) =>
                 <ButtonInput
                   name="letter-input"
-                  handleChange={(e) => this.handleLetterChange(e, index)}
+                  handleClick={(e) => this.handleLetterChange(e, index)}
                   {...letter} />
               )}
             </div>
