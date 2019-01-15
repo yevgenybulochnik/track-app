@@ -1,5 +1,8 @@
 @import "~bootstrap/scss/bootstrap";
 
+select {
+    -webkit-appearance: none;
+}
 
 .session-form {
     display: grid;
@@ -38,12 +41,10 @@
     grid-area: tracking;
 }
 
-.list-group {
-    list-style: decimal inside;
-}
-
-.list-group-item {
-    display: list-item;
+.route-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .numberInput-group {

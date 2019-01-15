@@ -7,8 +7,32 @@ const ButtonInput = ({ name, grade, value, isActive, handleClick}) =>
     <input type="radio" name={name} value={value} onClick={handleClick}/> {grade}
   </label>
 
-const Route = ({grade, letter}) =>
-  <li class="list-group-item"> {grade} {letter}</li>
+const Route = ({grade, letter, completion, falls, handleFalls, handleCompletion}) =>
+  <li class="list-group-item">
+    <div class="route-info">
+      <span style={{width: '3rem'}}>{grade}{letter}</span>
+      <div class="input-group-sm">
+        <select class="custom-select" value={completion} onChange={handleCompletion}>
+          <option value="redpoint">Redpoint</option>
+          <option value="onsite">Onsite</option>
+          <option value="project">Project</option>
+        </select>
+      </div>
+      <div class="input-group-sm">
+        <select class="custom-select" value={falls} onChange={handleFalls}>
+          <option value="0">Falls</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+    </div>
+  </li>
 
 
 class SessionForm extends React.Component {
@@ -47,12 +71,18 @@ class SessionForm extends React.Component {
   displayTracking() {
     if (this.state.tracking.length) {
       return (
-        <ul class="list-group">
-          {this.state.tracking.map((trackedRoute) => <Route {...trackedRoute} />)}
-        </ul>
+        <ol class="list-group" reversed>
+          {this.state.tracking.map((trackedRoute, index) =>
+            <Route
+              handleFalls={(e) => this.handleOptionChange(e, index, 'falls')}
+              handleCompletion={(e) => this.handleOptionChange(e, index, 'completion')}
+              {...trackedRoute}
+            />)
+          }
+        </ol>
       )
     } else {
-       return <h5 style={{textAlign: 'center'}}>No Routes Added</h5>
+       return <h5 style={{textAlign: 'center', marginTop: '5%'}}>No Routes Added</h5>
     }
   }
 
@@ -77,7 +107,9 @@ class SessionForm extends React.Component {
         tracking: [
           {
             grade: this.state.selectedGrade,
-            letter: ''
+            letter: '',
+            completion: 'redpoint',
+            falls: '0'
           },
           ...this.state.tracking
         ]
@@ -120,11 +152,25 @@ class SessionForm extends React.Component {
       tracking: [
         {
           grade: this.state.selectedGrade,
-          letter: this.state.selectedLetter
+          letter: this.state.selectedLetter,
+          completion: 'redpoint',
+          falls: '0'
         },
         ...this.state.tracking,
       ]})
     )
+  }
+
+  handleOptionChange(changeEvent, index, property) {
+    this.setState({
+      tracking: this.state.tracking.map((trackedRoute, position) => {
+        if (position == index) {
+          trackedRoute[property] = changeEvent.target.value
+        }
+        return trackedRoute
+      }),
+      ...this.state.tracking
+    })
   }
 
   render() {
@@ -155,7 +201,7 @@ class SessionForm extends React.Component {
               )}
             </div>
           </div>
-          <div class="session-tracking">
+          <div class="session-tracking border rounded">
             {
               this.displayTracking()
             }
