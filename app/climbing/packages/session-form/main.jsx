@@ -173,6 +173,10 @@ class SessionForm extends React.Component {
     })
   }
 
+  handleSubmit = () => {
+    console.log('test')
+  }
+
   render() {
     return (
       <div class="container">
@@ -205,6 +209,9 @@ class SessionForm extends React.Component {
             {
               this.displayTracking()
             }
+            <div class="submit">
+              <button class="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
+            </div>
           </div>
         </div>
       </div>

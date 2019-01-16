@@ -47,6 +47,12 @@ select {
     justify-content: space-between;
 }
 
+.submit {
+    @extend .m-2;
+    display: flex;
+    justify-content: center;
+}
+
 .numberInput-group {
     @extend .btn-group-toggle;
     margin: 0.25rem;
