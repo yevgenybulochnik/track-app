@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import './main.scss'
 
 const ButtonInput = ({ name, grade, value, isActive, handleClick}) =>
@@ -37,13 +38,13 @@ const Route = ({grade, letter, completion, falls, handleFalls, handleCompletion}
 
 class SessionForm extends React.Component {
   state = {
-    selectedSession: '',
+    selectedSession: 'lead',
     selectedGrade: '',
     selectedLetter: '',
     sessions: [
-      {type: 'Top Rope', value: 'top rope'},
-      {type: 'Lead', value: 'lead'},
-      {type: 'Boulder', value: 'boulder'},
+      {type: 'Top Rope', value: 'top rope', isActive: false},
+      {type: 'Lead', value: 'lead', isActive: true},
+      {type: 'Boulder', value: 'boulder', isActive: false},
     ],
     grades: [
       {grade: '6', value: '5.6', isActive: false},
@@ -84,6 +85,20 @@ class SessionForm extends React.Component {
     } else {
        return <h5 style={{textAlign: 'center', marginTop: '5%'}}>No Routes Added</h5>
     }
+  }
+
+  handleSessionChange(changeEvent, index) {
+    this.setState({
+      selectedSession: changeEvent.target.value,
+      sessions: this.state.sessions.map((session, position) => {
+        if (position === index) {
+          session.isActive = true;
+        } else {
+          session.isActive = false;
+        }
+        return session
+      })
+    })
   }
 
   handleGradeChange(changeEvent, index) {
@@ -174,7 +189,14 @@ class SessionForm extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log('test')
+    const data = {
+      session_type: this.state.selectedSession,
+      routes: this.state.tracking
+    }
+    axios.post('/session', data).then(res => console.log(res))
+    this.setState({
+      tracking: []
+    })
   }
 
   render() {
@@ -183,7 +205,13 @@ class SessionForm extends React.Component {
         <div class="session-form">
           <div class="session-selection">
             <div class="btn-group btn-group-toggle">
-              {this.state.sessions.map(session => <ButtonInput grade={session.type} />)}
+              {this.state.sessions.map((session, index) =>
+                <ButtonInput
+                  grade={session.type}
+                  isActive={session.isActive}
+                  handleClick={(e) => this.handleSessionChange(e, index)}
+                />
+              )}
             </div>
           </div>
           <div class="grade-input">
