@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    sessions = db.relationship('Session', backref='user', lazy='dynamic')
 
     def __repr__(self):
         return f'<User {self.email}, {self.id}>'
@@ -33,3 +34,5 @@ class User(db.Model, UserMixin):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+from app.climbing.models import Session, Route
