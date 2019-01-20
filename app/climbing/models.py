@@ -16,6 +16,7 @@ class Route(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     session_id = db.Column(db.Integer, db.ForeignKey('sessions.id'))
     timestamp = db.Column(db.DateTime)
+    type = db.Column(db.String(32))
     grade = db.Column(db.String(32))
     letter = db.Column(db.String(32))
     completion = db.Column(db.String(32))

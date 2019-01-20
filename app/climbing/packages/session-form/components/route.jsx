@@ -1,10 +1,18 @@
 import React from 'react'
 
 
-export const Route = ({grade, letter, completion, falls, handleFalls, handleCompletion}) =>
+export const Route = ({
+  type,
+  grade,
+  letter,
+  completion,
+  falls,
+  handleFalls,
+  handleCompletion
+}) =>
   <li class="list-group-item">
     <div class="route-info">
-      <span style={{width: '3rem'}}>{grade}{letter}</span>
+      <span style={{width: '4rem'}}>{grade}{letter} {type}</span>
       <div class="input-group-sm">
         <select class="custom-select" value={completion} onChange={handleCompletion}>
           <option value="redpoint">Redpoint</option>

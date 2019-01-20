@@ -7,12 +7,12 @@ import {Route} from './route'
 
 export class SessionForm extends React.Component {
   state = {
-    selectedSession: 'lead',
+    selectedSession: 'L',
     selectedGrade: '',
     selectedLetter: '',
     sessions: [
-      {type: 'Top Rope', value: 'top rope', isActive: false},
-      {type: 'Lead', value: 'lead', isActive: true},
+      {type: 'Top Rope', value: 'TR', isActive: false},
+      {type: 'Lead', value: 'L', isActive: true},
       {type: 'Boulder', value: 'boulder', isActive: false},
     ],
     grades: [
@@ -90,6 +90,7 @@ export class SessionForm extends React.Component {
       }, () => this.setState({
         tracking: [
           {
+            type: this.state.selectedSession,
             grade: this.state.selectedGrade,
             letter: '',
             completion: 'redpoint',
@@ -135,6 +136,7 @@ export class SessionForm extends React.Component {
     }, () => this.setState({
       tracking: [
         {
+          type: this.state.selectedSession,
           grade: this.state.selectedGrade,
           letter: this.state.selectedLetter,
           completion: 'redpoint',
@@ -158,8 +160,17 @@ export class SessionForm extends React.Component {
   }
 
   handleSubmit = () => {
+    let session;
+    if (
+      this.state.selectedSession === 'L' ||
+      this.state.selectedSession === 'TR'
+    ) {
+      session = 'ropes'
+    } else {
+      session = 'bouldering'
+    }
     const data = {
-      session_type: this.state.selectedSession,
+      session_type: session,
       routes: this.state.tracking
     }
     axios.post('/session', data).then(res => console.log(res))
@@ -176,8 +187,10 @@ export class SessionForm extends React.Component {
             <div class="btn-group btn-group-toggle">
               {this.state.sessions.map((session, index) =>
                 <ButtonInput
+                  name='session-input'
                   grade={session.type}
                   isActive={session.isActive}
+                  value={session.value}
                   handleClick={(e) => this.handleSessionChange(e, index)}
                 />
               )}
