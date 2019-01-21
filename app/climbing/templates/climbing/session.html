@@ -8,7 +8,9 @@
   <br>
   <div id="react"></div>
   <script>
-    window.props = {{props|tojson}}
+    {% if props %}
+      window.props = {{props|tojson}}
+    {% endif %}
     window.react_mount = document.getElementById("react")
   </script>
   <script src="{{url_for('climbing.static', filename='package_builds/session-form/sessionForm.bundle.js')}}"></script>

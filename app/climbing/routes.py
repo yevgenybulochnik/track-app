@@ -15,11 +15,6 @@ def overview():
 @bp.route('/session', methods=['GET', 'POST'])
 @login_required
 def session():
-    test_props = {
-        "users": [
-            {"username": current_user.email}
-        ]
-    }
     if request.method == 'POST':
         data = json.loads(request.data)
         routes = [Route(**route_data) for route_data in data['routes']]
@@ -31,4 +26,4 @@ def session():
         db.session.add(climbing_session)
         db.session.commit()
         return 'session saved'
-    return render_template('climbing/session.html', props=test_props)
+    return render_template('climbing/session.html')
