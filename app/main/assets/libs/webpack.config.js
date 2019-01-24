@@ -26,5 +26,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'bs.bundle.css'
     })
-  ]
+  ],
+  devServer: {
+    publicPath: '/static/main/package_builds/libs/'
+  }
 }

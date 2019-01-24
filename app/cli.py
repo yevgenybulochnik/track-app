@@ -23,6 +23,8 @@ def register(app):
             data = json.loads(f.read())
         if data['workspaces']:
             for workspace in data['workspaces']:
+                if workspace == 'wp_config':
+                    continue
                 package_name = path.basename(workspace)
                 package_path = path.abspath(workspace)
                 package_build_path = path.join(package_path, 'build')

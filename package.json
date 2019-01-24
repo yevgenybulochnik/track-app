@@ -1,6 +1,7 @@
 {
   "private": true,
   "workspaces": [
-    "app/main/packages/libs"
+    "wp_config",
+    "app/main/assets/libs"
   ]
 }
