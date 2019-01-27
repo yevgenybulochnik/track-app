@@ -1,5 +1,6 @@
 from os import path, listdir
 import json
+import subprocess
 
 
 class Asset:
@@ -45,10 +46,13 @@ class AssetBuilder:
         self.project_root = path.dirname(self.app_root)
         self.wp_config = path.join(self.project_root, 'wp_config')
         self.webpack_config = path.join(self.wp_config, 'webpack.config.js')
-        self.wp_bin = path.join(self.wp_config, 'node_modules', 'webpack')
+        self.wp_bin = path.join(
+            self.wp_config,
+            'node_modules', '.bin', 'webpack'
+        )
         self.wp_dev_server_bin = path.join(
             self.wp_config,
-            'node_modlues', 'webpack-dev-server'
+            'node_modules', '.bin', 'webpack-dev-server'
         )
 
     @property
@@ -62,6 +66,12 @@ class AssetBuilder:
                     BPAssets(self.app.blueprints[bp].root_path)
                 )
         return bp_assets
+
+    def execute(self):
+        subprocess.run([self.wp_bin], cwd=self.cwd)
+
+    def execute_dev_server(self):
+        subprocess.run([self.wp_dev_server_bin], cwd=self.cwd)
 
     def list_assets(self):
         for bp in self.blueprints:
