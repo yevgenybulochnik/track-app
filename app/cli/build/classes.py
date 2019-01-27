@@ -1,10 +1,21 @@
 from os import path, listdir
+import json
 
 
 class Asset:
     def __init__(self, abs_path):
         self.path = abs_path
         self.name = path.basename(self.path)
+
+    @property
+    def entry(self):
+        package_json = path.join(self.path, 'package.json')
+        try:
+            with open(package_json) as f:
+                data = json.loads(f.read())
+            return data['main']
+        except IOError:
+            raise IOError(f'Asset {self.path} does not have a package.json')
 
 
 class BPAssets:
