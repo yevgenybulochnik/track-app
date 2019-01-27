@@ -38,9 +38,10 @@ class BPAssets:
 
 
 class AssetBuilder:
-    def __init__(self, app):
+    def __init__(self, app, cwd):
         self.app = app
         self.app_root = app.root_path
+        self.cwd = cwd
         self.project_root = path.dirname(self.app_root)
         self.wp_config = path.join(self.project_root, 'wp_config')
         self.webpack_config = path.join(self.wp_config, 'webpack.config.js')
