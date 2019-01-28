@@ -109,9 +109,9 @@ class AssetBuilder:
     def generate_entry(self):
         entries = {}
         for bp in self.blueprints:
-            for entry, entry_path in bp.entry_points.items():
-                if self.cwd == path.dirname(entry_path):
-                    return {entry: entry_path}
+            for asset in bp.assets:
+                if self.cwd == asset.path:
+                    return bp.generate_entry(asset)
             if self.cwd == bp.path:
                 return bp.entry_points
             entries.update(bp.entry_points)
