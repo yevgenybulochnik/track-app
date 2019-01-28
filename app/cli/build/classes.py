@@ -41,8 +41,14 @@ class BPAssets:
     def entry_points(self):
         entries = dict()
         for asset in self.assets:
-            entries[f'{self.name}/{asset.name}/{asset.name}'] = f'{asset.path}/{asset.entry}'
+            entries.update(self.generate_entry(asset))
         return entries
+
+    def generate_entry(self, asset):
+        return {
+            f'{self.name}/{asset.name}/{asset.name}':
+            f'{asset.path}/{asset.entry}'
+        }
 
 
 class AssetBuilder:
