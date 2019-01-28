@@ -95,13 +95,21 @@ class AssetBuilder:
         )
 
     def generate_env(self):
-        entries = dict()
-        for bp in self.blueprints:
-            entries.update(bp.entry_points)
         config = {
-            'entry': entries
+            'entry': self.generate_entry(),
         }
         return json.dumps(config)
+
+    def generate_entry(self):
+        entries = {}
+        for bp in self.blueprints:
+            for entry, entry_path in bp.entry_points.items():
+                if self.cwd == path.dirname(entry_path):
+                    return {entry: entry_path}
+            if self.cwd == bp.path:
+                return bp.entry_points
+            entries.update(bp.entry_points)
+        return entries
 
     def list_assets(self):
         for bp in self.blueprints:
