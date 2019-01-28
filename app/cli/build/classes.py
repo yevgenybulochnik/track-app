@@ -37,6 +37,13 @@ class BPAssets:
             if path.isdir(asset_path)
         ]
 
+    @property
+    def entry_points(self):
+        entries = dict()
+        for asset in self.assets:
+            entries[f'{self.name}/{asset.name}/{asset.name}'] = f'{asset.path}/{asset.entry}'
+        return entries
+
 
 class AssetBuilder:
     def __init__(self, app, cwd):
@@ -68,10 +75,33 @@ class AssetBuilder:
         return bp_assets
 
     def execute(self):
-        subprocess.run([self.wp_bin], cwd=self.cwd)
+        subprocess.run(
+            [
+                self.wp_bin,
+                '--config', self.webpack_config,
+                '--env', self.generate_env()
+            ],
+            cwd=self.cwd
+        )
 
     def execute_dev_server(self):
-        subprocess.run([self.wp_dev_server_bin], cwd=self.cwd)
+        subprocess.run(
+            [
+                self.wp_dev_server_bin,
+                '--config', self.webpack_config,
+                '--env', self.generate_env()
+            ],
+            cwd=self.cwd
+        )
+
+    def generate_env(self):
+        entries = dict()
+        for bp in self.blueprints:
+            entries.update(bp.entry_points)
+        config = {
+            'entry': entries
+        }
+        return json.dumps(config)
 
     def list_assets(self):
         for bp in self.blueprints:

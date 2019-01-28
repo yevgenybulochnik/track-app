@@ -1,7 +1,7 @@
 {
   "name": "libs",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "libs.js",
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^4.2.1",
