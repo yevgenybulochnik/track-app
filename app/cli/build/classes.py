@@ -1,4 +1,4 @@
-from os import path, listdir
+import os
 import json
 import subprocess
 
@@ -6,11 +6,11 @@ import subprocess
 class Asset:
     def __init__(self, abs_path):
         self.path = abs_path
-        self.name = path.basename(self.path)
+        self.name = os.path.basename(self.path)
 
     @property
     def entry(self):
-        package_json = path.join(self.path, 'package.json')
+        package_json = os.path.join(self.path, 'package.json')
         try:
             with open(package_json) as f:
                 data = json.loads(f.read())
@@ -22,19 +22,19 @@ class Asset:
 class BPAssets:
     def __init__(self, abs_path):
         self.path = abs_path
-        self.name = path.basename(abs_path)
-        self.assets_path = path.join(self.path, 'assets')
+        self.name = os.path.basename(abs_path)
+        self.assets_path = os.path.join(self.path, 'assets')
 
     @property
     def assets(self):
         asset_dirs = [
-            path.join(self.assets_path, dir)
-            for dir in listdir(self.assets_path)
+            os.path.join(self.assets_path, dir)
+            for dir in os.listdir(self.assets_path)
         ]
         return [
             Asset(asset_path)
             for asset_path in asset_dirs
-            if path.isdir(asset_path)
+            if os.path.isdir(asset_path)
         ]
 
     @property
@@ -56,14 +56,14 @@ class AssetBuilder:
         self.app = app
         self.app_root = app.root_path
         self.cwd = cwd
-        self.project_root = path.dirname(self.app_root)
-        self.wp_config = path.join(self.project_root, 'wp_config')
-        self.webpack_config = path.join(self.wp_config, 'webpack.config.js')
-        self.wp_bin = path.join(
+        self.project_root = os.path.dirname(self.app_root)
+        self.wp_config = os.path.join(self.project_root, 'wp_config')
+        self.webpack_config = os.path.join(self.wp_config, 'webpack.config.js')
+        self.wp_bin = os.path.join(
             self.wp_config,
             'node_modules', '.bin', 'webpack'
         )
-        self.wp_dev_server_bin = path.join(
+        self.wp_dev_server_bin = os.path.join(
             self.wp_config,
             'node_modules', '.bin', 'webpack-dev-server'
         )
@@ -73,8 +73,8 @@ class AssetBuilder:
         bp_assets = []
         for bp in self.app.blueprints:
             bp_path = self.app.blueprints[bp].root_path
-            bp_assets_path = path.join(bp_path, 'assets')
-            if path.isdir(bp_assets_path):
+            bp_assets_path = os.path.join(bp_path, 'assets')
+            if os.path.isdir(bp_assets_path):
                 bp_assets.append(
                     BPAssets(self.app.blueprints[bp].root_path)
                 )
