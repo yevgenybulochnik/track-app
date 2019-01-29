@@ -4,7 +4,6 @@ var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = env => {
   var config = JSON.parse(env)
-  console.log(config.entry)
   return {
     mode: "development",
     entry: config.entry,
@@ -31,6 +30,15 @@ module.exports = env => {
       new MiniCssExtractPlugin({
         filename: '[name].bundle.css'
       })
-    ]
+    ],
+    devServer: {
+      port: config.port,
+      public: config.public_url,
+      publicPath: '/static/',
+      proxy: [{
+        context: [config.proxy_context],
+        target: config.target
+      }]
+    }
   }
 }

@@ -67,6 +67,7 @@ class AssetBuilder:
             self.wp_config,
             'node_modules', '.bin', 'webpack-dev-server'
         )
+        self.proxy_context = ''
 
     @property
     def blueprints(self):
@@ -103,6 +104,10 @@ class AssetBuilder:
     def generate_env(self):
         config = {
             'entry': self.generate_entry(),
+            'port': os.environ.get('WEBPACK_PORT'),
+            'public_url': os.environ.get('WEBPACK_PUBLIC_URL'),
+            'target': 'http://localhost:5000',
+            'proxy_context': self.proxy_context
         }
         return json.dumps(config)
 
@@ -111,10 +116,13 @@ class AssetBuilder:
         for bp in self.blueprints:
             for asset in bp.assets:
                 if self.cwd == asset.path:
+                    self.proxy_context = f'!(/static/{bp.name}/{asset.name}/**)'
                     return bp.generate_entry(asset)
-            if self.cwd == bp.path:
+            if self.cwd == bp.assets_path:
+                self.proxy_context = f'!(/static/{bp.name}/**)'
                 return bp.entry_points
             entries.update(bp.entry_points)
+        self.proxy_context = f'!(/static/**)'
         return entries
 
     def list_assets(self):

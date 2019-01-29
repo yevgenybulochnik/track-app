@@ -6,7 +6,7 @@
 {% endblock meta %}
 
 {% block styles %}
-  <link rel="stylesheet" href="{{url_for('main.static', filename='package_builds/libs/bs.bundle.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='main/libs/libs.bundle.css')}}">
 {% endblock %}
 
 {% block navbar%}
@@ -34,5 +34,5 @@
 {% endblock %}
 
 {% block scripts %}
-  <script src="{{url_for('main.static', filename='package_builds/libs/libs.bundle.js')}}"></script>
+  <script src="{{url_for('static', filename='main/libs/libs.bundle.js')}}"></script>
 {% endblock %}
