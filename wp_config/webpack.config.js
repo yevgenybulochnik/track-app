@@ -17,6 +17,17 @@ module.exports = env => {
     module: {
       rules: [
         {
+          test: /\.(js|jsx)$/,
+          exclude: /(node_modules)/,
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/env',
+              '@babel/preset-react'
+            ]
+          }
+        },
+        {
           test: /\.(sa|sc|c)ss$/,
           use: [
             {loader: MiniCssExtractPlugin.loader},
