@@ -1,7 +1,7 @@
 {
   "name": "session-form",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.jsx",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.2.3",

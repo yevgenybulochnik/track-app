@@ -1,7 +1,7 @@
 {% extends "main/index.html" %}
 
 {% block styles %}
-  <link rel="stylesheet" href="{{url_for('climbing.static', filename="package_builds/session-form/sessionForm.bundle.css")}}">
+  <link rel="stylesheet" href="{{url_for('static', filename="climbing/session-form/session-form.bundle.css")}}">
 {% endblock styles %}
 
 {% block app_content %}
@@ -13,5 +13,5 @@
     {% endif %}
     window.react_mount = document.getElementById("react")
   </script>
-  <script src="{{url_for('climbing.static', filename='package_builds/session-form/sessionForm.bundle.js')}}"></script>
+  <script src="{{url_for('static', filename='climbing/session-form/session-form.bundle.js')}}"></script>
 {% endblock app_content %}

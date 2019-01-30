@@ -1,7 +1,8 @@
 {
   "private": true,
   "workspaces": [
-    "app/main/packages/libs",
-    "app/climbing/packages/session-form"
+    "wp_config",
+    "app/climbing/assets/session-form",
+    "app/main/assets/libs"
   ]
 }
