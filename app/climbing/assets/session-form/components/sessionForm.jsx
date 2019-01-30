@@ -41,9 +41,10 @@ export class SessionForm extends React.Component {
   displayTracking() {
     if (this.state.tracking.length) {
       return (
-        <ol class="list-group" reversed>
+        <ol className="list-group" reversed>
           {this.state.tracking.map((trackedRoute, index) =>
             <Route
+              key={index}
               handleFalls={(e) => this.handleOptionChange(e, index, 'falls')}
               handleCompletion={(e) => this.handleOptionChange(e, index, 'completion')}
               {...trackedRoute}
@@ -181,12 +182,13 @@ export class SessionForm extends React.Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="session-form">
-          <div class="session-selection">
-            <div class="btn-group btn-group-toggle">
+      <div className="container">
+        <div className="session-form">
+          <div className="session-selection">
+            <div className="btn-group btn-group-toggle">
               {this.state.sessions.map((session, index) =>
                 <ButtonInput
+                  key={index}
                   name='session-input'
                   grade={session.type}
                   isActive={session.isActive}
@@ -196,31 +198,33 @@ export class SessionForm extends React.Component {
               )}
             </div>
           </div>
-          <div class="grade-input">
-            <div class="numberInput-group">
-              <div class="btn btn-primary disabled">5</div>
+          <div className="grade-input">
+            <div className="numberInput-group">
+              <div className="btn btn-primary disabled">5</div>
               {this.state.grades.map((grade, index) =>
                 <ButtonInput
+                  key={index}
                   name="number-input"
                   handleClick={(e) => this.handleGradeChange(e, index)}
                   {...grade}/>
               )}
             </div>
-            <div class="numberInput-group">
+            <div className="numberInput-group">
               {this.state.letters.map((letter, index) =>
                 <ButtonInput
+                  key={index}
                   name="letter-input"
                   handleClick={(e) => this.handleLetterChange(e, index)}
                   {...letter} />
               )}
             </div>
           </div>
-          <div class="session-tracking border rounded">
+          <div className="session-tracking border rounded">
             {
               this.displayTracking()
             }
-            <div class="submit">
-              <button class="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
+            <div className="submit">
+              <button className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
             </div>
           </div>
         </div>

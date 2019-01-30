@@ -10,18 +10,18 @@ export const Route = ({
   handleFalls,
   handleCompletion
 }) =>
-  <li class="list-group-item">
-    <div class="route-info">
+  <li className="list-group-item">
+    <div className="route-info">
       <span style={{width: '4rem'}}>{grade}{letter} {type}</span>
-      <div class="input-group-sm">
-        <select class="custom-select" value={completion} onChange={handleCompletion}>
+      <div className="input-group-sm">
+        <select className="custom-select" value={completion} onChange={handleCompletion}>
           <option value="redpoint">Redpoint</option>
           <option value="onsite">Onsite</option>
           <option value="project">Project</option>
         </select>
       </div>
-      <div class="input-group-sm">
-        <select class="custom-select" value={falls} onChange={handleFalls}>
+      <div className="input-group-sm">
+        <select className="custom-select" value={falls} onChange={handleFalls}>
           <option value="0">Falls</option>
           <option value="1">1</option>
           <option value="2">2</option>
