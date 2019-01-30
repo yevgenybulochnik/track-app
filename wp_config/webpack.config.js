@@ -8,7 +8,7 @@ module.exports = env => {
     mode: "development",
     entry: config.entry,
     output: {
-      path: path.join(__dirname, '..', 'static'),
+      path: path.join(__dirname, '..', 'app', 'static'),
       filename: '[name].bundle.js'
     },
     resolve: {
