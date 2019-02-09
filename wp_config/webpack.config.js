@@ -12,7 +12,7 @@ module.exports = env => {
       filename: '[name].bundle.js'
     },
     resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx', '.ts', '.tsx']
     },
     module: {
       rules: [
