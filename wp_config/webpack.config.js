@@ -12,18 +12,19 @@ module.exports = env => {
       filename: '[name].bundle.js'
     },
     resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx', '.ts', '.tsx']
     },
     module: {
       rules: [
         {
-          test: /\.(js|jsx)$/,
+          test: /\.(js|jsx|ts|tsx)$/,
           exclude: /(node_modules)/,
           loader: 'babel-loader',
           options: {
             presets: [
               '@babel/env',
-              '@babel/preset-react'
+              '@babel/preset-react',
+              '@babel/preset-typescript'
             ],
             plugins: [
               '@babel/plugin-proposal-class-properties'
