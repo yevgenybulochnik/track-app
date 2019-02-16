@@ -13,7 +13,6 @@ export class SessionForm extends React.Component {
     sessions: [
       {type: 'Top Rope', value: 'TR', isActive: false},
       {type: 'Lead', value: 'L', isActive: true},
-      {type: 'Boulder', value: 'boulder', isActive: false},
     ],
     grades: [
       {grade: '6', value: '5.6', isActive: false},
