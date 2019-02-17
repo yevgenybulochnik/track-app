@@ -1,0 +1,6 @@
+{
+  "name": "boulder-form",
+  "version": "1.0.0",
+  "main": "src/main.tsx",
+  "license": "MIT"
+}

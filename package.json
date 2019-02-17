@@ -3,6 +3,7 @@
   "workspaces": [
     "wp_config",
     "app/climbing/assets/session-form",
+    "app/climbing/assets/boulder-form",
     "app/main/assets/libs"
   ]
 }
