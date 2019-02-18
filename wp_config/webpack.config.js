@@ -48,6 +48,7 @@ module.exports = env => {
     ],
     devServer: {
       port: config.port,
+      host: config.host,
       public: config.public_url,
       publicPath: '/static/',
       proxy: [{
