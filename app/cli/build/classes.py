@@ -106,6 +106,7 @@ class AssetBuilder:
             'entry': self.generate_entry(),
             'port': os.environ.get('WEBPACK_PORT'),
             'public_url': os.environ.get('WEBPACK_PUBLIC_URL') or '',
+            'host': os.environ.get('WEBPACK_HOST') or 'localhost',
             'target': 'http://localhost:5000',
             'proxy_context': self.proxy_context
         }
