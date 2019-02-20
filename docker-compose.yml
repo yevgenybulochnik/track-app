@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+
+  webapp:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    container_name: webapp
+    image: webapp:latest
+    env_file: .env
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: nginx
+    image: webapp-nginx
+    ports:
+      - "8888:80"
