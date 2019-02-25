@@ -6,4 +6,5 @@ from app.main import bp
 @bp.route('/')
 @login_required
 def index():
+    print('hello')
     return render_template('main/index.html')

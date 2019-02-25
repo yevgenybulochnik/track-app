@@ -107,7 +107,7 @@ class AssetBuilder:
             'port': os.environ.get('WEBPACK_PORT'),
             'public_url': os.environ.get('WEBPACK_PUBLIC_URL') or '',
             'host': os.environ.get('WEBPACK_HOST') or 'localhost',
-            'target': 'http://localhost:5000',
+            'target': os.environ.get('WEBPACK_PROXY_TARGET') or 'http://localhost:5000',
             'proxy_context': self.proxy_context
         }
         return json.dumps(config)
