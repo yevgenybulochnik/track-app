@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  flask:
+    tty: true
+    build:
+      context: .
+      dockerfile: ./docker/dev/flask/Dockerfile
+    container_name: flask
+    image: flaskdev
+    env_file: .env
+    volumes:
+      - .:/flask_app
+
+  webpack:
+    tty: true
+    build:
+      context: .
+      dockerfile: ./docker/dev/webpack/Dockerfile
+    container_name: webpack
+    image: flaskdev-webpack
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/flask_app
