@@ -1,4 +1,4 @@
 #!/bin/sh
 yarn install
 pip install -e .
-flask build -d
+exec flask build -d

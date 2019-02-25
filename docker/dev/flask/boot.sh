@@ -1,3 +1,3 @@
 #!/bin/sh
 flask db upgrade
-flask run
+exec flask run
