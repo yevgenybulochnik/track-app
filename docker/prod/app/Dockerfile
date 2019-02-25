@@ -11,7 +11,7 @@ COPY migrations migrations
 COPY tests tests
 COPY wp_config wp_config
 COPY flask-base.py setup.py setup.cfg package.json config.py tsconfig.json ./
-COPY docker/app/boot.sh boot.sh
+COPY docker/prod/app/boot.sh boot.sh
 
 RUN pip install -e .
 

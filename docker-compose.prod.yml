@@ -5,7 +5,7 @@ services:
   webapp:
     build:
       context: .
-      dockerfile: ./docker/app/Dockerfile
+      dockerfile: ./docker/prod/app/Dockerfile
     container_name: webapp
     image: webapp:latest
     env_file: .env
@@ -13,7 +13,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: ./docker/nginx/Dockerfile
+      dockerfile: ./docker/prod/nginx/Dockerfile
     container_name: nginx
     image: webapp-nginx
     ports:
