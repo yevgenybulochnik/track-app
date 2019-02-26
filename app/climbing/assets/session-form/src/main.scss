@@ -12,7 +12,7 @@ select {
         "grade-input selection"
         "grade-input tracking";
         @include media-breakpoint-up(lg) {
-            grid-tempalte-columns: 2fr 4fr;
+            grid-template-columns: 2fr 4fr;
             grid-template-areas:
                 "selection tracking"
                 "grade-input tracking";
