@@ -3,13 +3,16 @@ from flask import (
     flash,
     redirect,
     url_for,
-    request
+    request,
+    jsonify
 )
 from flask_login import (
     current_user,
     login_user,
-    logout_user
+    logout_user,
+    login_required
 )
+from flask_jwt_extended import create_access_token
 from werkzeug.urls import url_parse
 from app.auth import bp
 from app.auth.forms import LoginForm
@@ -41,3 +44,10 @@ def logout():
     print(current_user.email)
     logout_user()
     return redirect(url_for('main.index'))
+
+
+@bp.route('/wctoken', methods=['POST'])
+@login_required
+def wctoken():
+    token = create_access_token(identity=current_user.id)
+    return jsonify(access_token=token)
