@@ -1,5 +1,7 @@
-from app import create_app, db, cli
-from app.models import User, Role, Session, Route
+from app import create_app
+from app.database import db
+from app.main.models import User, Role
+from app.climbing.models import Session, Route
 
 app = create_app()
 

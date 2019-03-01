@@ -1,6 +1,7 @@
 import pytest
-from app import create_app, db
-from app.models import User
+from app import create_app
+from app.database import db
+from app.main.models import User
 from config import Config
 
 

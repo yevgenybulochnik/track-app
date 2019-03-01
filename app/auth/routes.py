@@ -16,7 +16,7 @@ from flask_jwt_extended import create_access_token
 from werkzeug.urls import url_parse
 from app.auth import bp
 from app.auth.forms import LoginForm
-from app.models import User
+from app.main.models import User
 
 import urllib.parse
 
