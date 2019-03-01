@@ -1,4 +1,5 @@
-from app import create_app, db, cli
+from app import create_app
+from app.database import db
 from app.main.models import User, Role
 
 app = create_app()
