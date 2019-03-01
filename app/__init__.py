@@ -4,9 +4,10 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_jwt_extended import JWTManager
 
+from app.database import db
+
 from config import Config
 
-db = SQLAlchemy()
 migrate = Migrate()
 jwt = JWTManager()
 login = LoginManager()
