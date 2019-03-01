@@ -1,5 +1,4 @@
 import pytest
-import json
 from flask_jwt_extended import decode_token
 
 
@@ -15,11 +14,9 @@ def test_wctoken(client, database):
     }
     client.post('/login', data=data)
     response = client.post('/wctoken')
-    data = json.loads(response.data)
-    identity = decode_token(data['access_token'])['identity']
     assert response.is_json
-    assert data['access_token']
-    assert identity == 1
+    assert 'access_token' in response.json
+    assert decode_token(response.json['access_token'])['identity'] == 1
 
 
 def test_wctoken_unauth(client, database):
