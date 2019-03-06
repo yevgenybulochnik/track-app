@@ -35,3 +35,14 @@ def database():
     yield db
 
     db.drop_all()
+
+
+@pytest.fixture
+def logedInClient(client, database):
+    data = {
+        'email': 'user1@test.com',
+        'password': 'password1'
+    }
+    client.post('/login', data=data)
+
+    yield client
