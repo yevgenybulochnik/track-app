@@ -3,8 +3,6 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_marshmallow import Marshmallow
 from flask_jwt_extended import JWTManager
-from flask_restful import Api
-from flask_apispec import FlaskApiSpec
 
 from app.database import db
 
@@ -15,7 +13,6 @@ jwt = JWTManager()
 login = LoginManager()
 login.login_view = 'auth.login'
 ma = Marshmallow()
-api = Api()
 
 
 def register_blueprints(app):
@@ -23,6 +20,8 @@ def register_blueprints(app):
     app.register_blueprint(main_bp)
     from app.auth import bp as auth_bp
     app.register_blueprint(auth_bp)
+    from app.api import bp as api_bp
+    app.register_blueprint(api_bp, url_prefix='/api')
 
 
 def create_app(config=Config):
@@ -36,6 +35,5 @@ def create_app(config=Config):
     ma.init_app(app)
 
     register_blueprints(app)
-    api.init_app(app)
 
     return app
