@@ -10,5 +10,4 @@ class UserListResource(Resource):
     def get(self):
         users = User.query.all()
         results = users_schema.dump(users)
-        print(results)
         return {'users': results.data}
