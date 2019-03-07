@@ -1,13 +1,14 @@
-from flask_apispec import marshal_with
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required
 from app.main.models import User
-from app.main.schemas import UserSchema
+from app.main.schemas import users_schema
 
 
 class UserListResource(Resource):
     decorators = [jwt_required]
 
-    @marshal_with(UserSchema(many=True))
     def get(self):
-        return User.query.all()
+        users = User.query.all()
+        results = users_schema.dump(users)
+        print(results)
+        return {'users': results.data}
