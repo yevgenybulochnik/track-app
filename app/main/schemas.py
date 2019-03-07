@@ -12,3 +12,7 @@ class UserSchema(ma.ModelSchema):
         model = User
         fields = ('id', 'email', 'role')
     role = ma.Nested(RoleSchema, only=('name'))
+
+
+role_schema = RoleSchema()
+users_schema = UserSchema(many=True)
