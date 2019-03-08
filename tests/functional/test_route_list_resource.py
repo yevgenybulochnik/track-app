@@ -1,13 +1,17 @@
 from app.climbing.models import Route
 
 
-def test_route_list_resource(logedInClient, dummyData):
+def test_route_list_get_resource(logedInClient, dummyData):
     """
     GIVEN /api/routes endpoint
     WHEN the endpoint is hit
     THEN return list of serialized routes
     """
-    response = logedInClient.get('/api/routes')
+    token = logedInClient.post('/wctoken').json['access_token']
+    headers = {
+        'Authorization': f'Bearer {token}'
+    }
+    response = logedInClient.get('/api/routes', headers=headers)
     routes = response.get_json()['routes']
     route1_json = routes[0]
     route_from_db = Route.query.get(1)
