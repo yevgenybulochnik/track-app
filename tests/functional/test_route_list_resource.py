@@ -17,4 +17,3 @@ def test_route_list_resource(logedInClient, dummyData):
     assert route1_json['type'] == route_from_db.type
     assert route1_json['completion'] == route_from_db.completion
     assert route1_json['session'] == route_from_db.session.id
-
