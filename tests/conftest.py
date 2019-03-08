@@ -2,6 +2,7 @@ import pytest
 from app import create_app
 from app.database import db
 from app.main.models import User
+from app.climbing.models import Session, Route
 from config import Config
 
 
@@ -46,3 +47,32 @@ def logedInClient(client, database):
     client.post('/login', data=data)
 
     yield client
+
+
+@pytest.fixture
+def dummyData(database):
+    user1 = User.query.get(1)
+
+    route1 = Route(
+        type='lead',
+        grade='5.10',
+        letter='a',
+        completion='onsight',
+        falls='0'
+    )
+
+    route2 = Route(
+        type='top rope',
+        grade='5.9',
+        letter='',
+        completion='redpoint',
+        falls='0'
+    )
+
+    session1 = Session(
+        user=user1,
+        type='ropes',
+        routes=[route1, route2]
+    )
+    database.session.add(session1)
+    database.session.commit()
