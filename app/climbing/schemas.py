@@ -9,6 +9,7 @@ class RouteSchema(ma.ModelSchema):
 
 
 class SessionSchema(ma.ModelSchema):
+    routes = ma.Nested(RouteSchema, many=True)
 
     class Meta:
         model = Session

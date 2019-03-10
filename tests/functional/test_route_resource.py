@@ -1,6 +1,5 @@
 import json
 from app.climbing.models import Route
-from pprint import pprint
 
 
 def test_route_get_resource(logedInClient, dummyData):
