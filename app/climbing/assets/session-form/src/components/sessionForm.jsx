@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 
 import {ButtonInput} from './toggleBar'
 import {Route} from './route'
@@ -35,6 +36,14 @@ export class SessionForm extends React.Component {
     ],
     tracking: [
     ]
+  }
+
+  componentDidMount() {
+    axios.post('/wctoken').then(res => {
+      localStorage.setItem('token', res.data['access_token'])
+      let {identity} = jwt.decode(res.data['access_token'])
+      this.setState({user: identity})
+    })
   }
 
   displayTracking() {
@@ -170,10 +179,12 @@ export class SessionForm extends React.Component {
       session = 'bouldering'
     }
     const data = {
-      session_type: session,
+      user: this.state.user,
+      type: session,
       routes: this.state.tracking
     }
-    axios.post('/session', data).then(res => console.log(res))
+    let token = localStorage.getItem('token')
+    axios.post('/api/session', data, {headers: {authorization: `Bearer ${token}`}}).then(res => console.log(res))
     this.setState({
       tracking: []
     })

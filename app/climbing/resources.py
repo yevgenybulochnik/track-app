@@ -48,7 +48,6 @@ class SessionResource(Resource):
         data = request.get_json()
         try:
             new_session = session_schema.load(data)
-            print(new_session)
         except ValidationError as err:
             return {'status': 'validation error', 'error': err.messages}
         db.session.add(new_session)

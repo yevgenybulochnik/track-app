@@ -21,6 +21,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",
     "jquery": "^3.3.1",
+    "jsonwebtoken": "^8.5.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
   }

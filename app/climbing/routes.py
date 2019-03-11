@@ -15,15 +15,4 @@ def overview():
 @bp.route('/session', methods=['GET', 'POST'])
 @login_required
 def session():
-    if request.method == 'POST':
-        data = json.loads(request.data)
-        routes = [Route(**route_data) for route_data in data['routes']]
-        climbing_session = Session(
-            type=data['session_type'],
-            user=current_user,
-            routes=routes
-        )
-        db.session.add(climbing_session)
-        db.session.commit()
-        return 'session saved'
     return render_template('climbing/session.html')
