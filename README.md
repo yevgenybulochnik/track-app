@@ -4,3 +4,4 @@ This is a flask web app used to track a variety of activities including indoor r
 # ENV Vars Options
 - WEBPACK_PORT
 - WEBPACK_PUBLIC_URL
+- WEBPACK_HOST
