@@ -1,0 +1,44 @@
+@import "~bootstrap/scss/bootstrap";
+
+select {
+    -webkit-appearance: none;
+}
+
+.bouldering-form {
+    //div {
+        //border: solid red 1px;
+    //}
+
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+    grid-template-rows: auto 9fr;
+    grid-template-areas:
+        "grade-input tracking"
+        "grade-input tracking";
+}
+
+.grade-input {
+    grid-area: grade-input;
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.4rem;
+    button {
+        margin: 0.4rem 0.2rem;
+    }
+}
+
+.tracking {
+    grid-area: tracking;
+}
+
+.route-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.submit {
+    @extend .m-2;
+    display: flex;
+    justify-content: center;
+}

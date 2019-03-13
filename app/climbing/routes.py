@@ -12,7 +12,13 @@ def overview():
     return render_template('climbing/index.html')
 
 
-@bp.route('/session', methods=['GET', 'POST'])
+@bp.route('/session', methods=['GET'])
 @login_required
 def session():
     return render_template('climbing/session.html')
+
+
+@bp.route('/boulder', methods=['GET'])
+@login_required
+def boulderForm():
+    return render_template('climbing/boulderForm.html')
