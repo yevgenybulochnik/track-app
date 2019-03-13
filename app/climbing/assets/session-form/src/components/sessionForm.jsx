@@ -164,7 +164,6 @@ export class SessionForm extends React.Component {
         }
         return trackedRoute
       }),
-      ...this.state.tracking
     })
   }
 
