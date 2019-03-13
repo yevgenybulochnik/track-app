@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import moment from 'moment';
 
 import {ButtonInput} from './toggleBar'
 import {Route} from './route'
@@ -102,6 +103,7 @@ export class SessionForm extends React.Component {
             type: this.state.selectedSession,
             grade: this.state.selectedGrade,
             letter: '',
+            timestamp: moment().utc(),
             completion: 'redpoint',
             falls: '0'
           },
@@ -148,6 +150,7 @@ export class SessionForm extends React.Component {
           type: this.state.selectedSession,
           grade: this.state.selectedGrade,
           letter: this.state.selectedLetter,
+          timestamp: moment().utc(),
           completion: 'redpoint',
           falls: '0'
         },

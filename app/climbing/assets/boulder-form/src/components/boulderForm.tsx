@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import moment from 'moment';
 
 import {ButtonInput} from './toggleBar';
 import {BoulderRoute, BoulderRouteProps} from './boulderRoute';
@@ -43,6 +44,8 @@ export class BoulderForm extends React.Component<any, BoulderFormState> {
         {
           type: 'bouldering',
           grade: grade,
+          letter: '',
+          timestamp: moment().utc(),
           completion: 'redpoint',
           falls: '0'
         },
