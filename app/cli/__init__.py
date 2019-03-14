@@ -29,6 +29,7 @@ def build(list_assets, dev_server, cwd):
 def ipython():
     from app.database import db
     from app.main.models import User, Role
+    from app.climbing.models import Session, Route
     from IPython import embed
     from traitlets.config import get_config
     c = get_config()
@@ -36,5 +37,7 @@ def ipython():
     embed(user_ns={
         'db': db,
         'User': User,
-        'Role': Role
+        'Role': Role,
+        'Session': Session,
+        'Route': Route
     }, config=c)
