@@ -6,16 +6,16 @@ from app.climbing.models import Session, Route
 from app import db
 
 
-@bp.route('/overview', methods=['GET'])
+@bp.route('/dashboard', methods=['GET'])
 @login_required
-def overview():
-    return render_template('climbing/index.html')
+def dashboard():
+    return render_template('climbing/dashboard.html')
 
 
-@bp.route('/session', methods=['GET'])
+@bp.route('/ropes', methods=['GET'])
 @login_required
-def session():
-    return render_template('climbing/session.html')
+def ropesForm():
+    return render_template('climbing/ropesForm.html')
 
 
 @bp.route('/boulder', methods=['GET'])

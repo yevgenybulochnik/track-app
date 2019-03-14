@@ -2,7 +2,7 @@
 
 {% block app_content %}
   <div class="container">
-    <div class="display-1">Climbing Overview</div>
+    <div class="display-1">Climbing Dashboard</div>
     <div>{{ current_user.email }}</div>
     {% for session in current_user.sessions %}
       <div>{{session.timestamp}} {{session.type}}</div>  

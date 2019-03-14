@@ -7,7 +7,7 @@ import {ButtonInput} from './toggleBar'
 import {Route} from './route'
 
 
-export class SessionForm extends React.Component {
+export class RopesForm extends React.Component {
   state = {
     selectedSession: 'L',
     selectedGrade: '',
@@ -195,7 +195,7 @@ export class SessionForm extends React.Component {
   render() {
     return (
       <div className="container">
-        <div className="session-form">
+        <div className="ropes-form">
           <div className="session-selection">
             <div className="btn-group btn-group-toggle">
               {this.state.sessions.map((session, index) =>

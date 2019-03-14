@@ -12,8 +12,8 @@
 {% block navbar%}
   {% call navbar("Tracking-App") %}
     {% call nav("center") %}
-      <a class="nav-link nav-item" href="{{url_for('climbing.overview')}}">Climbing</a>
-      <a class="nav-link nav-item" href="{{url_for('climbing.session')}}">Session</a>
+      <a class="nav-link nav-item" href="{{url_for('climbing.dashboard')}}">Dashboard</a>
+      <a class="nav-link nav-item" href="{{url_for('climbing.ropesForm')}}">Ropes</a>
       <a class="nav-link nav-item" href="{{url_for('climbing.boulderForm')}}">Bouldering</a>
     {% endcall %}
     {% call nav("end") %}
