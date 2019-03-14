@@ -6,7 +6,8 @@ setup(
     packages=find_packages(),
     entry_points={
         'flask.commands': [
-            'build=app.cli:build'
+            'build=app.cli:build',
+            'ipython=app.cli:ipython'
         ]
     }
 )

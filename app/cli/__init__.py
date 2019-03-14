@@ -22,3 +22,19 @@ def build(list_assets, dev_server, cwd):
         wab.execute_dev_server()
     else:
         wab.execute()
+
+
+@click.command()
+@with_appcontext
+def ipython():
+    from app.database import db
+    from app.main.models import User, Role
+    from IPython import embed
+    from traitlets.config import get_config
+    c = get_config()
+    c.InteractiveShellEmbed.colors = 'Linux'
+    embed(user_ns={
+        'db': db,
+        'User': User,
+        'Role': Role
+    }, config=c)
