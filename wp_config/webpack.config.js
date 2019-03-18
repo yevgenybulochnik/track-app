@@ -54,7 +54,7 @@ module.exports = env => {
       port: config.port,
       host: config.host,
       public: config.public_url,
-      publicPath: '/static/',
+      publicPath: '/static/assets/',
       proxy: [{
         context: [config.proxy_context],
         target: config.target

@@ -10,6 +10,7 @@ logs/
 node_modules/
 package_builds/
 dist/
+app/static/assets/
 
 .vagrant/
 ubuntu-xenial-16.04-cloudimg-console.log
