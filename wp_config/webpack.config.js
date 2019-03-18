@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')
+var ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = env => {
   var config = JSON.parse(env)
@@ -8,8 +9,8 @@ module.exports = env => {
     mode: "development",
     entry: config.entry,
     output: {
-      path: path.join(__dirname, '..', 'app', 'static'),
-      filename: '[name].bundle.js'
+      path: path.join(__dirname, '..', 'app', 'static', 'assets'),
+      filename: '[name].[contenthash].bundle.js'
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx']
@@ -43,7 +44,10 @@ module.exports = env => {
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: '[name].bundle.css'
+        filename: '[name].[contenthash].bundle.css'
+      }),
+      new ManifestPlugin({
+        writeToFileEmit: true,
       })
     ],
     devServer: {
