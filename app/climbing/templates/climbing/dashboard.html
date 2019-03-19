@@ -1,14 +1,17 @@
 {% extends "main/index.html" %}
 
 {% block app_content %}
+  <br>
   <div class="container">
-    <div class="display-1">Climbing Dashboard</div>
-    <div>{{ current_user.email }}</div>
-    {% for session in current_user.sessions %}
+    <div class="jumbotron shadow-sm">
+      <div class="display-4">Climbing Dashboard</div>
+      <div>{{ current_user.email }}</div>
+      {% for session in current_user.sessions %}
       <div>{{session.timestamp}} {{session.type}}</div>  
       {% for route in session.routes %}
-        <div>{{route.type}} {{route.grade}} {{route.letter}}</div>
+      <div>{{route.type}} {{route.grade}} {{route.letter}}</div>
       {% endfor %}
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
 {% endblock app_content %}

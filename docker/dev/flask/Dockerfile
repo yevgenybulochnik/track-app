@@ -5,8 +5,12 @@ WORKDIR /flask_app
 ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_ENV=development
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install pipenv
+
+COPY Pipfile Pipfile
+COPY Pipfile.lock Pipfile.lock
+
+RUN pipenv install --dev --system
 
 COPY . .
 

@@ -6,7 +6,7 @@
 {% endblock meta %}
 
 {% block styles %}
-  <link rel="stylesheet" href="{{url_for('static', filename='main/libs/libs.bundle.css')}}">
+  {{ include_asset('main/libs', 'css') | safe }}
 {% endblock %}
 
 {% block navbar%}
@@ -39,5 +39,5 @@
 {% endblock %}
 
 {% block scripts %}
-  <script src="{{url_for('static', filename='main/libs/libs.bundle.js')}}"></script>
+  {{ include_asset('main/libs', 'js') | safe }}
 {% endblock %}

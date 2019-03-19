@@ -1,3 +1,4 @@
+# Needs to be refactored to use manifest.json in both containers, likely needs to have a single static assets volume
 version: '3'
 
 services:

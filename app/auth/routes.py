@@ -41,7 +41,6 @@ def login():
 
 @bp.route('/logout')
 def logout():
-    print(current_user.email)
     logout_user()
     return redirect(url_for('main.index'))
 

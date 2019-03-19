@@ -117,13 +117,13 @@ class AssetBuilder:
         for bp in self.blueprints:
             for asset in bp.assets:
                 if self.cwd == asset.path:
-                    self.proxy_context = f'!(/static/{bp.name}/{asset.name}/**)'
+                    self.proxy_context = f'!(/static/assets/{bp.name}/{asset.name}/**)'
                     return bp.generate_entry(asset)
             if self.cwd == bp.assets_path:
-                self.proxy_context = f'!(/static/{bp.name}/**)'
+                self.proxy_context = f'!(/static/assets/{bp.name}/**)'
                 return bp.entry_points
             entries.update(bp.entry_points)
-        self.proxy_context = f'!(/static/**)'
+        self.proxy_context = f'!(/static/assets/**)'
         return entries
 
     def list_assets(self):

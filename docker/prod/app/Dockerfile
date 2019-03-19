@@ -2,8 +2,13 @@ FROM python:3.7-alpine
 
 WORKDIR /flask_app
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install pipenv
+
+COPY Pipfile Pipfile
+COPY Pipfile.lock Pipfile.lock
+
+RUN pipenv install --dev --system
+
 RUN pip install gunicorn
 
 COPY app app

@@ -1,7 +1,7 @@
 {% extends "main/index.html" %}
 
 {% block styles %}
-  <link rel="stylesheet" href="{{url_for('static', filename="climbing/ropes-form/ropes-form.bundle.css")}}">
+  {{ include_asset('climbing/ropes-form', 'css') | safe }}
 {% endblock styles %}
 
 {% block app_content %}
@@ -13,5 +13,5 @@
     {% endif %}
     window.react_mount = document.getElementById("react")
   </script>
-  <script src="{{url_for('static', filename='climbing/ropes-form/ropes-form.bundle.js')}}"></script>
+  {{ include_asset('climbing/ropes-form', 'js') | safe }}
 {% endblock app_content %}
